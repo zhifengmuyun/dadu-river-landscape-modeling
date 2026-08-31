@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<badlands xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <!--  Regular grid structure  -->
+ <grid>
+             <!--  Digital elevation model file path  -->
+       <demfile>initopo.csv</demfile>
+                 <!--  Boundary type: flat, slope or wall  -->
+       <boundary>slope</boundary>
+     <!--  Optional parameter (integer) used to decrease TIN resolution.
+             The default value is set to 1. Increasing the factor
+             value will multiply the digital elevation model resolution
+             accordingly.   -->
+        <resfactor>1</resfactor>
+ </grid>
+          <!--  Simulation time structure  -->
+ <time>
+  <restart>
+      <!-- Model output folder name to restart the simulation from -->
+      <rfolder>initiallandscape</rfolder>
+      <!-- Model output file step number to restart the model from -->
+      <rstep>20</rstep>
+    </restart>
+     <!--  Simulation start time [a]  -->
+      <start>0</start>
+      <!--  Simulation end time [a]  -->
+      <end>5000000.</end>
+      <!--  Minim time step [a]  -->
+      <mindt>500.</mindt>
+      <!--  Display interval [a]  -->
+      <display>100000.</display>
+ </time>
+ <!-- Sea-level structure -->
+ <sea>
+        <!-- Relative sea-level position [m] -->
+        <position>0.</position>
+ </sea>
+
+ <tectonic>
+   <!--  Is 3D displacements on ? (1:on - 0:off). Default is 0. -->
+    <disp3d>1</disp3d>
+<!--  Only relevant when 3D displacements is on.
+             Closest distance [m] between nodes before
+             merging happens. This is optional if not given
+             the merging distance is set to half the resolution
+             of the digital elevation input file.  -->
+    <merge3d>500.</merge3d>
+<!--  Only relevant when 3D displacements is required.
+             This is useful if the horizontal displacements provided
+             in each maps are larger than the TIN resolution. In this
+             case, it is recommended to split each displacement periods
+             in evenly spaced intervals of given time duration [a].  -->
+    <time3d>10000.</time3d>
+<!--  Number of tectonic events  -->
+    <events>5</events>
+    <disp>
+<!--  Displacement start time [a]  -->
+   <dstart>0.</dstart>
+<!--  Displacement end time [a]  -->
+<dend>1000000</dend>
+<!--  Displacement map [m]  -->
+<dfile>newtec1.csv</dfile>
+</disp>
+    <disp>
+<!--  Displacement start time [a]  -->
+   <dstart>1000000.</dstart>
+<!--  Displacement end time [a]  -->
+<dend>2000000</dend>
+<!--  Displacement map [m]  -->
+<dfile>newtec2.csv</dfile>
+</disp>
+    <disp>
+<!--  Displacement start time [a]  -->
+   <dstart>2000000.</dstart>
+<!--  Displacement end time [a]  -->
+<dend>3000000</dend>
+<!--  Displacement map [m]  -->
+<dfile>newtec3.csv</dfile>
+</disp>
+    <!--disp-->
+<!--  Displacement start time [a]  -->
+   <!--dstart>3000000.</dstart-->
+<!--  Displacement end time [a]  -->
+<!--dend>3000500</dend-->
+<!--  Displacement map [m]  -->
+<!--dfile>tecdown.csv</dfile-->
+<!--/disp-->
+    <disp>
+<!--  Displacement start time [a]  -->
+   <dstart>3000000.</dstart>
+<!--  Displacement end time [a]  -->
+<dend>4000000</dend>
+<!--  Displacement map [m]  -->
+<dfile>newtec3.csv</dfile>
+</disp>
+    <disp>
+<!--  Displacement start time [a]  -->
+   <dstart>4000000.</dstart>
+<!--  Displacement end time [a]  -->
+<dend>5000000</dend>
+<!--  Displacement map [m]  -->
+<dfile>newtec3.csv</dfile>
+</disp>
+ </tectonic>
+<!--  Precipitation structure  -->
+<precipitation>
+<!--  Number of precipitation events  -->
+<climates>2</climates>
+<!--  Precipitation definition  -->
+<rain>
+<!--  Rain start time [a]  -->
+<rstart>-100000000.</rstart>
+<!--  Rain end time [a]  -->
+<rend>2000000.</rend>
+<!--  Precipitation value [m/a] - (optional)  -->
+<map>participe.csv</map>
+<!--rval>1</rval-->
+</rain>
+<rain>
+<!--  Rain start time [a]  -->
+<rstart>2000000.</rstart>
+<!--  Rain end time [a]  -->
+<rend>5000000.</rend>
+<!--  Precipitation value [m/a] - (optional)  -->
+<map>participe.csv</map>
+<!--rval>1</rval-->
+</rain>
+</precipitation>
+<!--  Stream power law parameters:
+         The stream power law is a simplified form of the usual expression of
+         sediment transport by water flow, in which the transport rate is assumed
+         to be equal to the local carrying capacity, which is itself a function of
+         boundary shear stress.  -->
+<sp_law>
+<!--  Maximum lake water filling thickness. This parameter is used
+             to defined maximum water level in depression area.
+             Default value is set to 200 m.  -->
+<fillmax>100.</fillmax>
+<!--  Values of m and n indicate how the incision rate scales
+             with bed shear stress for constant value of sediment flux
+             and sediment transport capacity.
+             Generally, m and n are both positive, and their ratio
+             (m/n) is considered to be close to 0.5  -->
+<m>0.5</m>
+<n>1.0</n>
+<!--  The erodibility coefficient is scale-dependent and its value depend
+              on lithology and mean precipitation rate, channel width, flood
+              frequency, channel hydraulics.  -->
+<erodibility>2e-6</erodibility>
+</sp_law>
+<!--  Linear slope diffusion parameters:
+         Parameterisation of the sediment transport includes the simple creep transport
+         law which states that transport rate depends linearly on topographic gradient.  -->
+<creep>
+<!--  Surface diffusion coefficient [m2/a]  -->
+<caerial>1.e-2</caerial>
+<!--  Marine diffusion coefficient [m2/a]  -->
+<cmarine>1.e-2</cmarine>
+<!--  River transported sediment diffusion
+             coefficient in marine realm [m2/a]  -->
+<criver>0.</criver>
+</creep>
+<!--  Output folder path  -->
+<outfolder>model1_1-2c1</outfolder>
+</badlands>
